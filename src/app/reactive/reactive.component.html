@@ -1,0 +1,35 @@
+<h2>Pet Daycare</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<div>
+  <label for="">Owner Name</label>
+  <input type="text" formControlName='name'>
+  <div *ngIf="form.invalid && form.touched">
+    <p *ngIf="nameControl?.errors?.required">Name is required</p>
+  </div>
+</div>
+<div>
+  <label for="">phone number</label>
+  <input type="number" formControlName="number" />
+</div>
+<div class="">
+ Pets:
+ <button (click)="addPet()">Add Pet</button>
+<div formArrayName="pets">
+
+  <div *ngFor="let control of petControls; let i = index" class="row" [formArrayName]='i'>
+    <div class="col-6">
+      <label for="">Pet Name</label>
+      <input formControlName='petName' type="text"/>
+    </div>
+    <div class="col-2">
+      <label for="">Pet Type</label>
+      <input formControlName="petType" type="text"/>
+    </div>
+    <div class="col-2">
+      <span (click)="removePet(i)">&times;</span>
+    </div>
+  </div>
+</div>
+</div>
+  <input type="submit" [disabled]="form.invalid" />
+</form>

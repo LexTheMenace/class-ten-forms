@@ -1,0 +1,25 @@
+<h2>Reservations</h2>
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div>
+    <label >Party Name: </label>
+    <input type='text' ngModel name="name" required minlength="2" #nameInput="ngModel" />
+    <div *ngIf="nameInput.touched && nameInput.invalid">
+      <p *ngIf="nameInput.errors?.required"> Name is required!</p>
+      <p *ngIf="nameInput.errors?.minlength">Name must be at least 2 characters.</p>
+    </div>
+  </div>
+  <div>
+    <label ># of People:</label>
+    <input type="number" ngModel name="numPeople" required [max]="8"  #numInput="ngModel" />
+    <div *ngIf="numInput.touched && numInput.invalid">
+      <p *ngIf="numInput.errors?.required"> Number of people is required!</p>
+      <p *ngIf="numInput.errors?.max">Cannot have more than 8.</p>
+    </div>
+  </div>
+  <div>
+    <label >Date: </label>
+    <input type="date" ngModel name="date" required [min]="today"/>
+  </div>
+  <input type="submit" [disabled]="form.invalid"/>
+</form>
+{{formValue}}
